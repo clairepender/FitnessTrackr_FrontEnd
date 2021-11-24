@@ -10,8 +10,8 @@ import { } from './components';
 
 
 const App = () => {
-    const [token, setToken] = useState(localStorage.getItem('token'));
-    const [user, setUser] = useState;
+    // const [token, setToken] = useState(localStorage.getItem('token'));
+    // const [user, setUser] = useState;
 
 
 

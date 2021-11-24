@@ -53,7 +53,7 @@ export async function register(username, password) {
 
 //get user//
 
-export async function getUser(token, setUser) {
+export async function getUser() {
     try {
         const response = await fetch(`${BASE_URL}/users/me`, {
             headers: {
@@ -63,7 +63,7 @@ export async function getUser(token, setUser) {
           })
           const result = await response.json();
           console.log(result);
-          
+          return result;
         //   setUser[result.data.username];
         //   return data;
     } catch(error) {
@@ -74,9 +74,25 @@ export async function getUser(token, setUser) {
 //***** ROUTINE FUNCTIONS *****//
 
 //GET /api/routines//
+//GET ALL PUBLIC ROUTINES//
 // returns a list of all public routines//
 
-
+export async function getAllRoutines() {
+    try {
+        const response = await fetch(`${BASE_URL}/routines`, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+          const result = await response.json();
+          console.log(result);
+          return result;
+        //   setUser[result.data.username];
+        //   return data;
+    } catch(error) {
+        console.error(error);
+    }
+} 
 
 
 //POST /api/routines//
@@ -84,6 +100,30 @@ export async function getUser(token, setUser) {
 
 
 
+export async function createRoutine(token, name, goal, isPublic) {
+    try {
+        const response = await fetch(`${BASE_URL}/routines`, {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer' + token
+            },
+            body: JSON.stringify({
+                routine: {
+                  name: name,
+                  goal: goal,
+                  isPublic: null,
+                }
+              })
+          })
+          const result = await response.json();
+          console.log(result);
+          return result;
+        //   setUser[result.data.username];
+        //   return data;
+    } catch(error) {
+        console.error(error);
+    }
+} 
 
 
 // GET /api/users/:username/routines //
@@ -108,6 +148,23 @@ export async function getUser(token, setUser) {
 
 //GET /api/activities //
 // returns a list of all activities in the database//
+
+export async function getAllActivities() {
+    try {
+        const response = await fetch(`${BASE_URL}/routines`, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+          const result = await response.json();
+          console.log(result);
+          return result;
+        //   setUser[result.data.username];
+        //   return data;
+    } catch(error) {
+        console.error(error);
+    }
+} 
 
 
 
