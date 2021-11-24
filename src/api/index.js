@@ -1,5 +1,8 @@
 //API CALLS//
 
+// if a route has a (*) next to it, it should require a logged in user to be present
+// if a route has a (**) next to it, the logged in user should be the owner of the modified object
+
 import { BASE_URL } from '../constants';
 
 //***** USER FUNCTIONS *****//
@@ -53,7 +56,7 @@ export async function register(username, password) {
 
 //get user//
 
-export async function getUser() {
+export async function getUser(token) {
     try {
         const response = await fetch(`${BASE_URL}/users/me`, {
             headers: {
@@ -62,7 +65,7 @@ export async function getUser() {
             },
           })
           const result = await response.json();
-          console.log(result);
+        //   console.log(result);
           return result;
         //   setUser[result.data.username];
         //   return data;
@@ -85,7 +88,7 @@ export async function getAllRoutines() {
             },
           })
           const result = await response.json();
-          console.log(result);
+        //   console.log(result);
           return result;
         //   setUser[result.data.username];
         //   return data;
@@ -103,6 +106,7 @@ export async function getAllRoutines() {
 export async function createRoutine(token, name, goal, isPublic) {
     try {
         const response = await fetch(`${BASE_URL}/routines`, {
+            method: "POST",
             headers: {
               'Content-Type': 'application/json',
               'Authorization': 'Bearer' + token
@@ -111,15 +115,14 @@ export async function createRoutine(token, name, goal, isPublic) {
                 routine: {
                   name: name,
                   goal: goal,
-                  isPublic: null,
+                  isPublic: isPublic,
                 }
               })
           })
           const result = await response.json();
-          console.log(result);
+        //   console.log(result);
           return result;
-        //   setUser[result.data.username];
-        //   return data;
+        
     } catch(error) {
         console.error(error);
     }
@@ -130,12 +133,26 @@ export async function createRoutine(token, name, goal, isPublic) {
 // returns a list of public routines for particular user//
 
 
-
+export async function getUsersRoutines() {
+    try {
+        const response = await fetch(`${BASE_URL}/users/:username/routines`, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+          const result = await response.json();
+        //   console.log(result);
+          return result;
+      
+    } catch(error) {
+        console.error(error);
+    }
+} 
 
 // PATCH /api/routines/:routineId//
 // update a routine, notably change public/private, the name, or the goal //
 
-
+export async function updateRoutine(name, goal, isPublic)
 
 
 // DELETE /api/routines/:routineId //
