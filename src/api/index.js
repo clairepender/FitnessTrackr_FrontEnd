@@ -133,11 +133,13 @@ export async function createRoutine(token, name, goal, isPublic) {
 // returns a list of public routines for particular user//
 
 
-export async function getUsersRoutines() {
+export async function getUserRoutines() {
     try {
         const response = await fetch(`${BASE_URL}/users/:username/routines`, {
+            method: "PATCH",
             headers: {
               'Content-Type': 'application/json',
+              'Authorization': 'Bearer' + token
             },
           })
           const result = await response.json();
@@ -152,13 +154,43 @@ export async function getUsersRoutines() {
 // PATCH /api/routines/:routineId//
 // update a routine, notably change public/private, the name, or the goal //
 
-export async function updateRoutine(name, goal, isPublic)
+export async function updateRoutine(token, name, description) {
+    try {
+        const response = await fetch(`${BASE_URL}/activities/:activityId`, {
+            headers: {
+                'Content-Type': 'application/json',
+              'Authorization': 'Bearer' + token
+            },
+            body: JSON.stringify({
+                routine: routine
+            }),
+        })
+    } catch(error) {
+        console.error(error);
+    }
+}
 
 
 // DELETE /api/routines/:routineId //
 // hard delete a routine. make sure to delete all the routineActivities whose routine is the one being deleted //
 
-
+export async function deleteRoutine() {
+    try {
+        const response = await fetch(`${BASE_URL}/routines/:routineId`, {
+            method: "DELETE",
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer' + token
+            },
+          })
+          const result = await response.json();
+        //   console.log(result);
+          return result;
+      
+    } catch(error) {
+        console.error(error);
+    }
+}
 
 
 //***** ACTIVITIES FUNCTIONS *****//
@@ -213,3 +245,21 @@ export async function getAllActivities() {
 
 //DELETE /api/routine_activities/:routineActivityId//
 // remove an activity from a routine (hard deleting routine_activity), dissociating an activity from a routine //
+
+export async function removeActivityFromRoutine() {
+    try {
+        const response = await fetch(`${BASE_URL}/routine_activities/:routineActivityId`, {
+            method: "DELETE",
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer' + token
+            },
+          })
+          const result = await response.json();
+        //   console.log(result);
+          return result;
+      
+    } catch(error) {
+        console.error(error);
+    }
+}
