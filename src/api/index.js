@@ -2,57 +2,61 @@
 
 // if a route has a (*) next to it, it should require a logged in user to be present
 // if a route has a (**) next to it, the logged in user should be the owner of the modified object
-
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { BASE_URL } from '../constants';
 
 //***** USER FUNCTIONS *****//
 
 //login//
 
-export async function login(userName, passWord) {
+// export async function login(userName, passWord) {
 
-    try {
-        const response = await fetch(`${BASE_URL}/users/login`, {
-            method: "POST",
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-            user: {
-                username: userName,
-                password: passWord
-                  }
-                })
-            })
+//     try {
+//         const response = await fetch(`${BASE_URL}/users/login`, {
+//             method: "POST",
+//             headers: {
+//               'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify({
+//             user: {
+//                 username: userName,
+//                 password: passWord
+//                   }
+//                 })
+//             })
               
-                const result = await response.json();
-                return result;
+//                 const result = await response.json();
+//                 console.log(result)
+//                 return result;
 
-    } catch(error) {
-        console.error(error);
-    }
-}
+//     } catch(error) {
+//         console.error(error);
+//     }
+// }
 
 //register//
 
-export async function register(username, password) {
-    try {
-        const response = await fetch(`${BASE_URL}/users/register`, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                    username: username,
-                    password: password
-            })
-        })
-        const result = await response.json();
-        return result;
-    } catch(error) {
-        console.error(error);
-    }
-}
+// export async function register(userName, passWord) {
+//     try {
+//         const response = await fetch(`${BASE_URL}/users/register`, {
+//             method: "POST",
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify({
+//                     username: userName,
+//                     password: passWord
+//             })
+//         })
+        
+//         const result = await response.json();
+//         return result;
+
+//     } catch(error) {
+//         console.error(error);
+//     }
+// }
 
 //get user//
 
