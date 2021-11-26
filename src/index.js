@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { isLoggedIn } from './api';
 
 import { Login } from './components';
 
@@ -12,18 +13,22 @@ import { Login } from './components';
 const App = () => {
     const [token, setToken] = useState(localStorage.getItem('token'));
     const [user, setUser] = useState("");
+    const [loggedIn, setLoggedIn] = useState(isLoggedIn(token));
 
+
+    // useEffect(() => {
+    //     console.log("Mounted")
+    //     const token = localStorage.getItem("token")
+    //     //now we need to get the token from local storage and use it to log in
+    //     if (token) {
+    //         setToken(token);
+    //     }    
+    // }, [token])
 
     useEffect(() => {
-        console.log("Mounted")
-        const token = localStorage.getItem("token")
-        //now we need to get the token from local storage and use it to log in
-        if (token) {
-            setToken(token);
-        }    
+        setLoggedIn(isLoggedIn(token));
     }, [token])
-
-
+    
 
 
     return (
@@ -39,8 +44,12 @@ const App = () => {
                 </div>
 
                 {/* ROUTE PATHS BELOW*/}
-                <Route path="/login" render={(routeProps) => <Login {...routeProps} setToken={setToken} setUser={setUser} />}/> 
-                <Route path="/register" render={(routeProps) => <Login {...routeProps} setToken={setToken} setUser={setUser} />}/> 
+                <Route path="/login" render={(routeProps) => <Login {...routeProps} setToken={setToken} />}/> 
+                <Route path="/register" render={(routeProps) => <Login {...routeProps} setToken={setToken} />}/>
+                
+        
+
+  
             </div>
         </BrowserRouter>
     )

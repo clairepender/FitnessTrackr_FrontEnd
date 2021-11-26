@@ -8,6 +8,14 @@ import { BASE_URL } from '../constants';
 
 //***** USER FUNCTIONS *****//
 
+export function isLoggedIn(token) {
+    if (token) {
+      return true
+    } else {
+      return false
+    }
+  };
+
 //login//
 
 // export async function login(userName, passWord) {

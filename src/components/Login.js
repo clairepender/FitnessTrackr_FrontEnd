@@ -20,7 +20,7 @@ async function register(userName, passWord, setToken) {
         const token = result.token;
         setToken[token];
         localStorage.setItem("token", token)
-        console.log(token)
+        console.log(result)
 
     } catch(error) {
         console.error(error);
@@ -36,18 +36,16 @@ async function login(userName, passWord, setToken) {
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-            user: {
                 username: userName,
                 password: passWord
-                  }
-                })
+        })
             })
               
                 const result = await response.json();
                 const token = result.token;
-                console.log(result)
                 setToken[token];
                 localStorage.setItem("token", token);
+                console.log(result)
                 
 
     } catch(error) {
@@ -57,8 +55,8 @@ async function login(userName, passWord, setToken) {
 
 const Login = ({setToken, match}) => {
     
-    const [userName, setUsername] = useState("your username");
-    const [passWord, setPassword] = useState("your password");
+    const [userName, setUsername] = useState("");
+    const [passWord, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
     return (
