@@ -8,83 +8,24 @@ import { BASE_URL } from '../constants';
 
 //***** USER FUNCTIONS *****//
 
-export function isLoggedIn(token) {
-    if (token) {
-      return true
-    } else {
-      return false
-    }
-  };
-
-//login//
-
-// export async function login(userName, passWord) {
-
-//     try {
-//         const response = await fetch(`${BASE_URL}/users/login`, {
-//             method: "POST",
-//             headers: {
-//               'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify({
-//             user: {
-//                 username: userName,
-//                 password: passWord
-//                   }
-//                 })
-//             })
-              
-//                 const result = await response.json();
-//                 console.log(result)
-//                 return result;
-
-//     } catch(error) {
-//         console.error(error);
-//     }
-// }
-
-//register//
-
-// export async function register(userName, passWord) {
-//     try {
-//         const response = await fetch(`${BASE_URL}/users/register`, {
-//             method: "POST",
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify({
-//                     username: userName,
-//                     password: passWord
-//             })
-//         })
-        
-//         const result = await response.json();
-//         return result;
-
-//     } catch(error) {
-//         console.error(error);
-//     }
-// }
-
 //get user//
 
-export async function getUser(token) {
-    try {
-        const response = await fetch(`${BASE_URL}/users/me`, {
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + token
-            },
-          })
-          const result = await response.json();
-        //   console.log(result);
-          return result;
-        //   setUser[result.data.username];
-        //   return data;
-    } catch(error) {
-        console.error(error);
-    }
-} 
+
+export async function getUser(token, setUser){
+    fetch(`${BASE_URL}/users/me`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+      })
+    .then(response => response.json())
+    .then(result => {
+        setUser(result)
+        localStorage.setItem("user", result.username);
+        console.log("this is the getUser result", result);
+    })
+    .catch(console.error);
+}
 
 //***** ROUTINE FUNCTIONS *****//
 

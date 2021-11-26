@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
-import { isLoggedIn } from './api';
+import { getUser } from './api';
 
-import { Login } from './components';
+import { Login, NavBar, MyRoutines, Routines } from './components';
 
 
 
@@ -13,7 +13,6 @@ import { Login } from './components';
 const App = () => {
     const [token, setToken] = useState(localStorage.getItem('token'));
     const [user, setUser] = useState("");
-    const [loggedIn, setLoggedIn] = useState(isLoggedIn(token));
 
 
     // useEffect(() => {
@@ -26,8 +25,14 @@ const App = () => {
     // }, [token])
 
     useEffect(() => {
-        setLoggedIn(isLoggedIn(token));
-    }, [token])
+        const token = localStorage.getItem("token");
+        if(token){
+            setToken(token);
+            getUser(token, setUser);
+            
+            
+        }
+    }, [])
     
 
 
@@ -35,17 +40,13 @@ const App = () => {
         <BrowserRouter>
             <div>
                 <div id="title">
-                    <h3>test title</h3>
+                    <h3>Fitness Trackr</h3>
                 </div>
-                <div id="nav-bar">
-                    <Link to="/login">Login</Link>
-                    <Link to="/">Home</Link>
-                    <Link to="/routines">My Routines</Link>
-                </div>
-
+                <NavBar token={token} setToken={setToken} />
                 {/* ROUTE PATHS BELOW*/}
                 <Route path="/login" render={(routeProps) => <Login {...routeProps} setToken={setToken} />}/> 
                 <Route path="/register" render={(routeProps) => <Login {...routeProps} setToken={setToken} />}/>
+                <Route exact path="/routines" render={(routeProps) => <Routines />}/>
                 
         
 

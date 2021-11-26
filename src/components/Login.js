@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom';
 import { BASE_URL } from '../constants';
 import { } from '../api';
 
-async function register(userName, passWord, setToken) {
+async function register(userName, passWord, setToken, confirmPassword) {
+    if (passWord !== confirmPassword) {
+        alert("Passwords don't match!");
+        return;
+    }
     try {
         const response = await fetch(`${BASE_URL}/users/register`, {
             method: "POST",
@@ -27,8 +31,9 @@ async function register(userName, passWord, setToken) {
     }
 }
 
-async function login(userName, passWord, setToken) {
 
+//*** TO DO: need to create error alert for failed login ***//
+async function login(userName, passWord, setToken) {
     try {
         const response = await fetch(`${BASE_URL}/users/login`, {
             method: "POST",
@@ -40,7 +45,6 @@ async function login(userName, passWord, setToken) {
                 password: passWord
         })
             })
-              
                 const result = await response.json();
                 const token = result.token;
                 setToken[token];
