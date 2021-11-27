@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { getAllRoutines } from '../api'
+import { getAllRoutines, } from '../api'
 
 /* AS ANY USER on the Routines tab, I want to:
 
@@ -23,7 +23,7 @@ const Routines = () => {
     useEffect(async () => {
         const getRoutines = await getAllRoutines();
         setDisplay(getRoutines)
-    })
+    }, [])
 
     return (
         <div>

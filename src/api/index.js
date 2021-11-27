@@ -1,5 +1,36 @@
 //API CALLS//
 
+import axios from 'axios';
+const { REACT_APP_API_URL = 'https://fitnesstrac-kr.herokuapp.com' } = process.env;
+export const API_URL = REACT_APP_API_URL;
+export const api = axios.create({
+  baseURL: `${API_URL}/api`,
+})
+export const callApi = async ({url, method, token, body, updateStatus}) => {
+  console.log({url: `${API_URL}/api${url}`, method, token, body, updateStatus})
+  try {
+    const options = {
+      method: method ? method.toLowerCase() : 'get',
+      url: `${API_URL}/api${url}`,
+      data: body,
+    };
+    if(token) {
+      options.headers = {'Authorization': `Bearer ${token}`};
+    }
+    
+    const {data} = await api(options);
+    console.log(data)
+    if(data.error) throw data.error;
+    console.log(data);
+    return data;
+  } catch (error) {
+    const errToThrow = error?.response?.data?.error; // handle axios 400- and 500-level errors
+    console.error(errToThrow);
+    updateStatus({error: errToThrow || 'ERROR'});
+  }
+}
+
+
 // if a route has a (*) next to it, it should require a logged in user to be present
 // if a route has a (**) next to it, the logged in user should be the owner of the modified object
 import React, { useState } from 'react';
@@ -12,7 +43,7 @@ import { BASE_URL } from '../constants';
 
 
 export async function getUser(token, setUser){
-    fetch(`${BASE_URL}/users/me`, {
+   const getUserFetch = await fetch(`${BASE_URL}/users/me`, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
@@ -20,11 +51,13 @@ export async function getUser(token, setUser){
       })
     .then(response => response.json())
     .then(result => {
-        setUser(result)
+        setUser(result.username)
         localStorage.setItem("user", result.username);
-        console.log("this is the getUser result", result);
+        console.log("this is the getUser result", result.username);
+        return result.username
     })
     .catch(console.error);
+    return getUserFetch;
 }
 
 //***** ROUTINE FUNCTIONS *****//
@@ -62,7 +95,7 @@ export async function createRoutine(token, name, goal, isPublic) {
             method: "POST",
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': 'Bearer' + token
+              'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({
                 routine: {
@@ -86,17 +119,18 @@ export async function createRoutine(token, name, goal, isPublic) {
 // returns a list of public routines for particular user//
 
 
-export async function getUserRoutines() {
+export async function getUserRoutines(username, token) {
     try {
-        const response = await fetch(`${BASE_URL}/users/:username/routines`, {
-            method: "PATCH",
+        const response = await fetch(`${BASE_URL}/users/${username}/routines`, {
+            method: "GET",
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': 'Bearer' + token
+              'Authorization': 'Bearer ' + token
             },
           })
+          console.log(response)
           const result = await response.json();
-        //   console.log(result);
+          console.log('this is the result', result);
           return result;
       
     } catch(error) {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-
+import { getUser, getUserRoutines } from '../api';
 
 
 
@@ -16,10 +16,43 @@ be able to update the duration or count of any activity on the routine
 be able to remove any activity from the routine */
 
 
+
+
 const MyRoutines = ({token}) => {
+    const [user, setUser] = useState([]);
+    // const [routines, setRout] = useState([]);
+    // const [displayRout, setDisplayRout] = useState([]);
 
+
+
+
+
+    useEffect(async () => {
+       if(token) {
+       const userdata = await getUser(token, setUser)
+       console.log('userdata', userdata)
+       const userRoutineData = await getUserRoutines(userdata, token)
+       console.log(userRoutineData)
+       }
+
+    }, [])
+
+
+
+    // useEffect(async () => {
+        
+    //       const userRoutineData = await getUserRoutines(user, token)
+    //       console.log(userRoutineData)
+        
+    // }, [user]);
+
+    
+    
+        return (
+            <h3>test {user} </h3>
+        )
+    
+        
 }
-
-
 
 export default MyRoutines;

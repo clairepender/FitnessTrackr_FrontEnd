@@ -4,10 +4,10 @@ import { BASE_URL } from '../constants';
 import { } from '../api';
 
 async function register(userName, passWord, setToken, confirmPassword) {
-    if (passWord !== confirmPassword) {
-        alert("Passwords don't match!");
-        return;
-    }
+    // if (passWord !== confirmPassword) {
+    //     alert("Passwords don't match!");
+    //     return;
+    // }
     try {
         const response = await fetch(`${BASE_URL}/users/register`, {
             method: "POST",
