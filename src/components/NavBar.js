@@ -1,12 +1,9 @@
 import React from "react";
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const NavBar = ({token, setToken}) => {
-    const history = useHistory();
-    function loginRedirect() {
-        history.push('/login');
-    }
-
+    
+        console.log(token)
     return (
         <nav>
                 <div id="nav-bar">
@@ -14,14 +11,12 @@ const NavBar = ({token, setToken}) => {
                     <Link to="/register">Sign Up </Link>
                     <Link to="/myroutines">My Routines </Link>
                     <Link to="/routines">Public Routines </Link>
-                    <Link to="/login">Login</Link>
-                    {/* {(!token ? <span className="nav-link active" to="/login" onClick={() => {
-                        loginRedirect();
-                    }}>Log In</span> : 
-                            <Link className="nav-link active" to="/logout" onClick={(event) => {
+                    
+                    {(!token ? <Link className="nav-link active" to="/login">Login </Link> : 
+                            <Link className="nav-link active" to="#" onClick={(event) => {
                                 localStorage.removeItem("token");
                                 setToken("");
-                        }}>Log Out</Link>)} */}
+                        }}>Log Out</Link>)}
                 </div>
         </nav>
     )

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { BASE_URL } from '../constants';
 import { } from '../api';
 
@@ -47,7 +47,7 @@ async function login(userName, passWord, setToken) {
             })
                 const result = await response.json();
                 const token = result.token;
-                setToken[token];
+                setToken(token);
                 localStorage.setItem("token", token);
                 console.log(result)
                 
@@ -58,7 +58,7 @@ async function login(userName, passWord, setToken) {
 }
 
 const Login = ({setToken, match}) => {
-    
+    const history = useHistory();
     const [userName, setUsername] = useState("");
     const [passWord, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -67,9 +67,9 @@ const Login = ({setToken, match}) => {
         <form
         onSubmit={(event) => {
             event.preventDefault();
-            if (match.url === "/login") login(userName, passWord, setToken);
+            if (match.url === "/login") login(userName, passWord, setToken) 
             if (match.url === "/register") register(userName, passWord, confirmPassword, setToken)
-            
+            history.push('/routines')
         }}
         >
             {/*USERNAME*/}
