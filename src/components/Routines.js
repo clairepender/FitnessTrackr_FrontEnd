@@ -14,16 +14,15 @@ A list of activities for the routine, including their name, description, and dur
 //     setDisplay[routines];
 // }
 
-const Routines = () => {
-    const [routines, setRoutines] = useState([]);
+const Routines = ({token}) => {
     const [display, setDisplay] = useState([]);
 
  
 
     useEffect(async () => {
-        const getRoutines = await getAllRoutines();
+        const getRoutines = await getAllRoutines(token);
         setDisplay(getRoutines)
-    }, [])
+    }, [token])
 
     return (
         <div>

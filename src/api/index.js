@@ -1,34 +1,34 @@
 //API CALLS//
 
-import axios from 'axios';
-const { REACT_APP_API_URL = 'https://fitnesstrac-kr.herokuapp.com' } = process.env;
-export const API_URL = REACT_APP_API_URL;
-export const api = axios.create({
-  baseURL: `${API_URL}/api`,
-})
-export const callApi = async ({url, method, token, body, updateStatus}) => {
-  console.log({url: `${API_URL}/api${url}`, method, token, body, updateStatus})
-  try {
-    const options = {
-      method: method ? method.toLowerCase() : 'get',
-      url: `${API_URL}/api${url}`,
-      data: body,
-    };
-    if(token) {
-      options.headers = {'Authorization': `Bearer ${token}`};
-    }
+// import axios from 'axios';
+// const { REACT_APP_API_URL = 'https://fitnesstrac-kr.herokuapp.com' } = process.env;
+// export const API_URL = REACT_APP_API_URL;
+// export const api = axios.create({
+//   baseURL: `${API_URL}/api`,
+// })
+// export const callApi = async ({url, method, token, body, updateStatus}) => {
+//   console.log({url: `${API_URL}/api${url}`, method, token, body, updateStatus})
+//   try {
+//     const options = {
+//       method: method ? method.toLowerCase() : 'get',
+//       url: `${API_URL}/api${url}`,
+//       data: body,
+//     };
+//     if(token) {
+//       options.headers = {'Authorization': `Bearer ${token}`};
+//     }
     
-    const {data} = await api(options);
-    console.log(data)
-    if(data.error) throw data.error;
-    console.log(data);
-    return data;
-  } catch (error) {
-    const errToThrow = error?.response?.data?.error; // handle axios 400- and 500-level errors
-    console.error(errToThrow);
-    updateStatus({error: errToThrow || 'ERROR'});
-  }
-}
+//     const {data} = await api(options);
+//     console.log(data)
+//     if(data.error) throw data.error;
+//     console.log(data);
+//     return data;
+//   } catch (error) {
+//     const errToThrow = error?.response?.data?.error; // handle axios 400- and 500-level errors
+//     console.error(errToThrow);
+//     updateStatus({error: errToThrow || 'ERROR'});
+//   }
+// }
 
 
 // if a route has a (*) next to it, it should require a logged in user to be present
@@ -89,7 +89,7 @@ export async function getAllRoutines() {
 
 
 
-export async function createRoutine(token, name, goal, isPublic) {
+export async function createRoutine(token, newName, newGoal, newPublic) {
     try {
         const response = await fetch(`${BASE_URL}/routines`, {
             method: "POST",
@@ -98,15 +98,13 @@ export async function createRoutine(token, name, goal, isPublic) {
               'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({
-                routine: {
-                  name: name,
-                  goal: goal,
-                  isPublic: isPublic,
-                }
+                  name: newName,
+                  goal: newGoal,
+                  isPublic: newPublic,
               })
           })
           const result = await response.json();
-        //   console.log(result);
+          console.log('create routine result', result);
           return result;
         
     } catch(error) {

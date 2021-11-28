@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import { getUser } from './api';
 
-import { Login, NavBar, MyRoutines, Routines } from './components';
+import { Login, NavBar, MyRoutines, Routines, CreateNewRoutine } from './components';
 
 
 
@@ -13,6 +13,7 @@ import { Login, NavBar, MyRoutines, Routines } from './components';
 const App = () => {
     const [token, setToken] = useState(localStorage.getItem('token'));
     const [user, setUser] = useState("");
+    const [display, setDisplay] = useState([]);
 
 
     // useEffect(() => {
@@ -29,10 +30,11 @@ const App = () => {
         if(token){
             setToken(token);
             getUser(token, setUser);
+            setDisplay(token, display)
             
             
         }
-    }, [])
+    }, [token])
     
 
 
@@ -48,7 +50,7 @@ const App = () => {
                 <Route path="/register" render={(routeProps) => <Login {...routeProps} setToken={setToken} />}/>
                 <Route exact path="/routines" render={(routeProps) => <Routines token={token} />}/>
                 <Route exact path="/myroutines" render={(routeProps) => <MyRoutines {...routeProps} token={token} setUser={setUser} user={user} />}/>
-                
+                <Route exact path="/createnewroutine" render={(routeProps) => <CreateNewRoutine {...routeProps} token={token} setToken={setToken} setDisplay={setDisplay} display={display} />}/>
         
 
   
