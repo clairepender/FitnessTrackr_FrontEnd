@@ -17,46 +17,61 @@ const CreateNewRoutine = ({token, display, setDisplay}) => {
 
     if(token) {
       return (
-          <article>
-              <h3>Create New Routine</h3>
-              <form onSubmit={async (event) => {
-                  event.preventDefault();
-                  try {
-                    const result = await createRoutine(token, newName, newGoal, newPublic)
-                    setDisplay([...display, result])
-                    //create an alert here?//
-                  } catch (error) {
-                      console.error(error)
-                  };
-              }}>
-                  <label htmlFor="routineName">Routine Name:</label>
-                  <input 
-                    type='text'
-                    value={newName}
-                    onChange={({target: {value}}) => setNewName(value)}
-                    className='form-control'
-                    id='routineName'
-                    placeholder='name'
-                  />
-                    <label htmlFor="routineGoal">Routine Goal:</label>
+          <div>
+            <article>
+                <div>
+                <h3>Create New Routine</h3>
+                <form onSubmit={async (event) => {
+                    event.preventDefault();
+                    try {
+                        const result = await createRoutine(token, newName, newGoal, newPublic)
+                        setDisplay([...display, result])
+                        //create an alert here?//
+                    } catch (error) {
+                        console.error(error)
+                    };
+                }}>
+                    <div>
+                    <label htmlFor="routineName">Routine Name:</label>
                     <input 
                         type='text'
-                        value={newGoal}
-                        onChange={({target: {value}}) => setNewGoal(value)}
+                        value={newName}
+                        onChange={({target: {value}}) => setNewName(value)}
                         className='form-control'
-                        id='routineGoal'
-                        placeholder='goal'
-                    />
-                    <label htmlFor="routinePublic">Make Routine Public?</label>
-                    <input 
-                    type='checkbox'
-                    value={newPublic}
-                    onChange={({target: {value}}) => setNewPublic(!newPublic)}
-                    id='routinePublic'
-                    />
-                    <button className="submitNewRoutine">Submit!</button>
-              </form>
+                        id='routineName'
+                        placeholder='name'
+                    /></div>
+                    <div>
+                        <label htmlFor="routineGoal">Routine Goal:</label>
+                        <input 
+                            type='text'
+                            value={newGoal}
+                            onChange={({target: {value}}) => setNewGoal(value)}
+                            className='form-control'
+                            id='routineGoal'
+                            placeholder='goal'
+                        /></div>
+                        <div>
+                        <label htmlFor="routinePublic">Make Routine Public?</label>
+                        <input 
+                        type='checkbox'
+                        value={newPublic}
+                        onChange={({target: {value}}) => setNewPublic(!newPublic)}
+                        id='routinePublic'
+                        /></div>
+                        <div>
+                        <button className="submitNewRoutine">Submit!</button></div>
+                </form>
+                </div>
           </article>
+                <div>
+            <Link to="/myroutines">
+                <button type="button" id="newRoutine">
+                Back to My Routines
+                </button>
+            </Link></div>
+
+</div>
       )
     }  else {
         return (

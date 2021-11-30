@@ -16,11 +16,15 @@ be able to update the duration or count of any activity on the routine
 be able to remove any activity from the routine */
 
 
+// async function getMyRoutines(user, token) {
+//     const myroutines = await getUserRoutines(user.username, token)
+//     console.log('these are my routines', myroutines)
+// }
 
 
 const MyRoutines = ({token}) => {
     const [user, setUser] = useState([]);
-    // const [routines, setRout] = useState([]);
+    const [myRoutines, setMyRoutines] = useState([]);
     // const [displayRout, setDisplayRout] = useState([]);
 
 
@@ -29,27 +33,52 @@ const MyRoutines = ({token}) => {
 
     useEffect(async () => {
        if(token) {
-       const userdata = await getUser(token, setUser)
-       console.log('userdata', userdata)
-       const userRoutineData = await getUserRoutines(userdata, token)
-       console.log(userRoutineData)
+      const getUserData = await getUser(token, setUser)
+       console.log('this is the useEffectGetUserData', getUserData)
+       setUser(getUserData)
        }
+       
+    
+    }, [token])
 
-    }, [])
 
 
-
-    // useEffect(async () => {
-        
-    //       const userRoutineData = await getUserRoutines(user, token)
-    //       console.log(userRoutineData)
-        
-    // }, [user]);
+    useEffect(async () => {
+        if (token) {
+        const myRoutineData = getUserRoutines(user, setMyRoutines, token)
+        console.log('myRoutineData from MyRoutines', myRoutineData)
+        setMyRoutines(myRoutineData)
+        }
+    }, [token]);
 
     
     
         return (
-            <h3>test {user} </h3>
+            <div>
+
+            <h3> {user}: </h3>
+
+            { myRoutines.map((routine, index) => {
+                return (
+                    <div key={index}>
+                        <h4>{routine.name}</h4>
+                        <ul>
+                            <li>{routine.goal}</li>
+                            <li>{routine.activities}</li>
+                        </ul>
+                    </div>
+                )
+            })}
+
+        
+            
+            {/* <Link to="/createnewroutine">
+				<button type="button" id="newRoutine">
+					Create A New Routine
+				</button>
+			</Link> */}
+
+            </div>
         )
     
         

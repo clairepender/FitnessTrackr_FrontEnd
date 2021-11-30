@@ -1,2 +1,2 @@
 
-export const BASE_URL = "http://fitnesstrackr-rafa.herokuapp.com/api";
+export const BASE_URL = "https://fitnesstrackr-rafa.herokuapp.com/api";

@@ -43,22 +43,25 @@ import { BASE_URL } from '../constants';
 
 
 export async function getUser(token, setUser){
-   const getUserFetch = await fetch(`${BASE_URL}/users/me`, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-      })
-    .then(response => response.json())
-    .then(result => {
-        setUser(result.username)
-        localStorage.setItem("user", result.username);
-        console.log("this is the getUser result", result.username);
-        return result.username
-    })
-    .catch(console.error);
-    return getUserFetch;
+    try {
+        const res = await fetch(`${BASE_URL}/users/me`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        const data = await res.json();
+        const username = data.username;
+        setUser(username)
+        localStorage.setItem("user", username);
+        console.log("this is the getUser result", username);
+        return username
+    } catch(err) {
+      console.error(err);
+    }
 }
+  
+
 
 //***** ROUTINE FUNCTIONS *****//
 
@@ -117,22 +120,21 @@ export async function createRoutine(token, newName, newGoal, newPublic) {
 // returns a list of public routines for particular user//
 
 
-export async function getUserRoutines(username, token) {
+export async function getUserRoutines(username, setMyRoutines, token) {
     try {
         const response = await fetch(`${BASE_URL}/users/${username}/routines`, {
-            method: "GET",
             headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + token
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
-          })
-          console.log(response)
-          const result = await response.json();
-          console.log('this is the result', result);
-          return result;
+        })
+        const data = await response.json();
+        console.log('myRoutineData from API Index', data)
+        setMyRoutines(data);
+        return data;
       
     } catch(error) {
-        console.error(error);
+        console.log(error);
     }
 } 
 
@@ -144,7 +146,7 @@ export async function updateRoutine(token, name, description) {
         const response = await fetch(`${BASE_URL}/activities/:activityId`, {
             headers: {
                 'Content-Type': 'application/json',
-              'Authorization': 'Bearer' + token
+              'Authorization': 'Bearer ' + token
             },
             body: JSON.stringify({
                 routine: routine

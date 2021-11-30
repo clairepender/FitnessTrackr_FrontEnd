@@ -14,6 +14,7 @@ const App = () => {
     const [token, setToken] = useState(localStorage.getItem('token'));
     const [user, setUser] = useState("");
     const [display, setDisplay] = useState([]);
+    const [myRoutines, setMyRoutines] = useState([]);
 
 
     // useEffect(() => {
@@ -30,9 +31,7 @@ const App = () => {
         if(token){
             setToken(token);
             getUser(token, setUser);
-            setDisplay(token, display)
-            
-            
+            setDisplay(token, display);        
         }
     }, [token])
     
@@ -49,7 +48,7 @@ const App = () => {
                 <Route path="/login" render={(routeProps) => <Login {...routeProps} setToken={setToken} />}/> 
                 <Route path="/register" render={(routeProps) => <Login {...routeProps} setToken={setToken} />}/>
                 <Route exact path="/routines" render={(routeProps) => <Routines token={token} />}/>
-                <Route exact path="/myroutines" render={(routeProps) => <MyRoutines {...routeProps} token={token} setUser={setUser} user={user} />}/>
+                <Route exact path="/myroutines" render={(routeProps) => <MyRoutines {...routeProps} token={token} setToken={setToken} setUser={setUser} user={user} setMyRoutines={setMyRoutines} myRoutines={myRoutines} />}/>
                 <Route exact path="/createnewroutine" render={(routeProps) => <CreateNewRoutine {...routeProps} token={token} setToken={setToken} setDisplay={setDisplay} display={display} />}/>
         
 
