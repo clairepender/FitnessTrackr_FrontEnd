@@ -14,7 +14,7 @@ const NavBar = ({token, setToken}) => {
                     <Link to="/routines">Public Routines </Link>
                     <Link to="/createnewroutine">Create a New Routine </Link>
                     <Link to="/activities">Public Activities </Link>
-                    <Link to="/myactivities">My Activities </Link>
+                    <Link to="/createactivity">Create a New Activity </Link>
                     
                     {(!token ? <Link className="nav-link active" to="/login">Login </Link> : 
                             <Link className="nav-link active" to="#" onClick={(event) => {

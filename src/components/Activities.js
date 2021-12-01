@@ -26,12 +26,21 @@ const Activities = ({token}) => {
                         <h4>Name: {activity.name}</h4>
                         <ul>
                             <li>Description: {activity.description}</li>
-                            <li>Creator: {activity.creatorName} </li>
                         </ul>
                     </div>
                 )
             })}
+
+            <div>
+                <Link to="/createactivity">
+                    <button type="button" id="createnewactivity">
+                        Create a New Activity
+                    </button>
+                </Link>
+            </div>
+
         </div>
+
     )
 }
 

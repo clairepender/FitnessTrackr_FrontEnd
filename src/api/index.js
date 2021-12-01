@@ -206,9 +206,25 @@ export async function getAllActivities() {
 
 
 //POST /api/activities //
+//CREATE A NEW ACTIVITY//
 // a request to this endpoint will attempt to create a new activity. you must pass a valid token with this request, or it will be rejected//
 
-
+export async function createNewActivity(token, newActName, newActDesc){
+    const response = await fetch(`${BASE_URL}/activities`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+          },
+        body: JSON.stringify({
+          name: newActName,
+          description: newActDesc
+        })
+    })
+    const data = await response.json();
+    console.log(data)
+    return data;
+  }
 
 //PATCH /api/activities/:activityId //
 // anyone can update an activity//
