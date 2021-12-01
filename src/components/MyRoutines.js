@@ -16,71 +16,52 @@ be able to update the duration or count of any activity on the routine
 be able to remove any activity from the routine */
 
 
-// async function getMyRoutines(user, token) {
-//     const myroutines = await getUserRoutines(user.username, token)
-//     console.log('these are my routines', myroutines)
-// }
+
+async function getMyRoutines(username) {
+    console.log(username)
+    const routines = await getUserRoutines(username)
+    // console.log('these are my routines', routines)
+    return routines;
+}
 
 
-const MyRoutines = ({token}) => {
-    const [user, setUser] = useState([]);
+const MyRoutines = ({token, user}) => {
     const [myRoutines, setMyRoutines] = useState([]);
-    // const [displayRout, setDisplayRout] = useState([]);
-
 
 
 
 
     useEffect(async () => {
-       if(token) {
-      const getUserData = await getUser(token, setUser)
-       console.log('this is the useEffectGetUserData', getUserData)
-       setUser(getUserData)
-       }
-       
-    
-    }, [token])
-
-
-
-    useEffect(async () => {
-        if (token) {
-        const myRoutineData = getUserRoutines(user, setMyRoutines, token)
-        console.log('myRoutineData from MyRoutines', myRoutineData)
-        setMyRoutines(myRoutineData)
+        if(user) {
+           const userData = await getMyRoutines(user, token, setMyRoutines)
+            console.log(user)
+            setMyRoutines(userData)
+            
         }
-    }, [token]);
+    }, [user])
 
-    
-    
+
+
+
         return (
             <div>
 
-            <h3> {user}: </h3>
+            {/* <h3> {user}: </h3> */}
 
-            { myRoutines.map((routine, index) => {
+            {myRoutines.map((routine, index) => {
                 return (
                     <div key={index}>
-                        <h4>{routine.name}</h4>
+                        <h4>Routine Name: {routine.name}</h4>
                         <ul>
-                            <li>{routine.goal}</li>
-                            <li>{routine.activities}</li>
+                            <li>Goal: {routine.goal}</li>
+                            <li>Activities: {routine.activities}</li>
                         </ul>
                     </div>
                 )
             })}
 
-        
-            
-            {/* <Link to="/createnewroutine">
-				<button type="button" id="newRoutine">
-					Create A New Routine
-				</button>
-			</Link> */}
-
             </div>
         )
-    
         
 }
 

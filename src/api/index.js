@@ -119,24 +119,40 @@ export async function createRoutine(token, newName, newGoal, newPublic) {
 // GET /api/users/:username/routines //
 // returns a list of public routines for particular user//
 
+const USER_BASE_URL = "https://fitnesstrackr-rafa.herokuapp.com/api/users";
 
-export async function getUserRoutines(username, setMyRoutines, token) {
+export async function getUserRoutines(username) {
+    if(!username) return [];
     try {
-        const response = await fetch(`${BASE_URL}/users/${username}/routines`, {
+        const response = await fetch(`${USER_BASE_URL}/${username}/routines`, {
+            method: "GET",
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
+                'Content-Type': 'application/json'
             },
         })
         const data = await response.json();
         console.log('myRoutineData from API Index', data)
-        setMyRoutines(data);
         return data;
       
     } catch(error) {
         console.log(error);
     }
 } 
+
+// export async function getUserRoutines(username) {
+//     try {
+//         const response = await fetch(`${BASE_URL}/users/${username}/routines`)
+//         console.log('this is the response', response)
+//         const result = await response.json();
+//         const theResult = result;
+//         console.log('this is the API result', theResult)
+//         return theResult;
+
+//     } catch(error) {
+//         console.error("ERROR GETTING USER ROUTINE DATA")
+//     }
+// }
+
 
 // PATCH /api/routines/:routineId//
 // update a routine, notably change public/private, the name, or the goal //

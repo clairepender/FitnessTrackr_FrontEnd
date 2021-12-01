@@ -31,7 +31,8 @@ const App = () => {
         if(token){
             setToken(token);
             getUser(token, setUser);
-            setDisplay(token, display);        
+            setDisplay(token, display);
+            setMyRoutines(token)        
         }
     }, [token])
     
