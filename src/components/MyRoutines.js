@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { getUserRoutines } from '../api';
+import { useHistory } from 'react-router-dom';
+import { getUserRoutines, deleteRoutine } from '../api';
 
 
 
@@ -28,6 +28,11 @@ async function getMyRoutines(username, token, setMyRoutines) {
 
 const MyRoutines = ({token, user}) => {
     const [myRoutines, setMyRoutines] = useState([]);
+    const history = useHistory();
+
+    function backToAllRoutines() {
+        history.push('/routines')
+    };
 
 
     useEffect(() => {
@@ -39,7 +44,7 @@ const MyRoutines = ({token, user}) => {
 
 
 
-        return (
+    return  (
             <div>
 
             <h2> Routines for {user} </h2>
@@ -51,14 +56,50 @@ const MyRoutines = ({token, user}) => {
                         <ul>
                             <li>Goal: {routine.goal}</li>
                             <li>Activities: {routine.activities}</li>
+                            <li>Activities: </li>
+                                {myRoutines.activities ? (myRoutines.activities.map((activity, actindex) => (
+                                    <ul key={actindex}>
+                                        <li>Activity Name: {activity.name}</li>
+                                        <ul>
+                                            <li>Description: {activity.description}</li>
+                                            <li>Count: {activity.count}</li>
+                                            <li>Duration: {activity.duration}</li>
+                                        </ul> 
+                                    </ul>
+                                ))) : 
+                                (<p>none</p>)}
+                                <ul>
+                                        <button
+                                            onClick={async () => {
+                                            const routineId = routine.id
+                                            const result = await deleteRoutine(token, routineId);
+                                            alert('Routine deleted!');
+                                            backToAllRoutines();
+                                            }}
+                                            className="deleteButton">
+                                            Delete Routine
+                                        </button>
+                                </ul>
                         </ul>
                     </div>
                 )
             })}
 
             </div>
-        )
+            )
         
 }
 
 export default MyRoutines;
+
+{/* <li>Activities: </li>
+                                {routine.activities ? (routine.activities.map((activity, actindex) => (
+                                    <ul key={actindex}>
+                                        <li>Activity Name: {activity.name}</li>
+                                        <ul>
+                                            <li>Description: {activity.description}</li>
+                                            <li>Count: {activity.count}</li>
+                                            <li>Duration: {activity.duration}</li>
+                                        </ul> 
+                                    </ul>
+                                ))) : */}

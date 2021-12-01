@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { } from 'react-router-dom';
 import { getAllRoutines, } from '../api'
 
 /* AS ANY USER on the Routines tab, I want to:
@@ -8,22 +8,26 @@ see a list of all public routines showing:
 The routine name, goal, and creator's username
 A list of activities for the routine, including their name, description, and duration and/or count*/
 
-// async function allRoutines(setRoutines, setDisplay) {
-//     const routines = await getAllRoutines();
-//     setRoutines[routines];
-//     setDisplay[routines];
-// }
+
+
+async function getRoutines(setDisplay) {
+    const theRoutines = await getAllRoutines(setDisplay)
+    console.log(theRoutines)
+    // setDisplay(theRoutines)
+    // console.log(theRoutines)
+}
 
 const Routines = ({token}) => {
     const [display, setDisplay] = useState([]);
  
 
-    useEffect(async () => {
-        const getRoutines = await getAllRoutines(token);
-        console.log(getRoutines)
-        setDisplay(getRoutines)
+    useEffect(() => {
+        if(token) {
+       getRoutines(setDisplay)
+    }
     }, [token])
 
+   
     return (
         <div>
                 <h2>
@@ -57,7 +61,7 @@ const Routines = ({token}) => {
             })}
         </div>
     )
-
+    
 }
 
 export default Routines;

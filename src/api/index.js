@@ -69,7 +69,7 @@ export async function getUser(token, setUser){
 //GET ALL PUBLIC ROUTINES//
 // returns a list of all public routines//
 
-export async function getAllRoutines() {
+export async function getAllRoutines(setDisplay) {
     try {
         const response = await fetch(`${BASE_URL}/routines`, {
             headers: {
@@ -77,6 +77,7 @@ export async function getAllRoutines() {
             },
           })
           const result = await response.json();
+          setDisplay(result)
         //   console.log(result);
           return result;
         //   setUser[result.data.username];
@@ -164,17 +165,17 @@ export async function updateRoutine(token, name, description) {
 // DELETE /api/routines/:routineId //
 // hard delete a routine. make sure to delete all the routineActivities whose routine is the one being deleted //
 
-export async function deleteRoutine() {
+export async function deleteRoutine(token, routineId) {
     try {
-        const response = await fetch(`${BASE_URL}/routines/:routineId`, {
+        const response = await fetch(`${BASE_URL}/routines/${routineId}`, {
             method: "DELETE",
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': 'Bearer' + token
+              'Authorization': 'Bearer ' + token
             },
           })
           const result = await response.json();
-        //   console.log(result);
+          console.log(result);
           return result;
       
     } catch(error) {
@@ -238,7 +239,24 @@ export async function createNewActivity(token, newActName, newActDesc){
 
 //POST /api/routines/:routineId/activities //
 // attaches a single activity to a routine. prevents duplication on (routineId, activityId) pair //
+//ATTACH AN ACTIVITY TO A ROUTINE //
 
+export async function addActivityToRoutine(routineId, activityId, newCount, newDuration) {
+    try {
+        const response = await fetch(`${BASE_URL}/routines/${routineId}/activities`, {
+            method: 'POST',
+            body: JSON.stringify({
+                activityId: activityId,
+                count: newCount,
+                duration: newDuration
+            })
+        })
+        const data = await response.json();
+        console.log(data)
+    } catch(error) {
+        console.error(error)
+    }
+}
 
 
 //PATCH /api/routine_activities/:routineActivityId //

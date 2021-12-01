@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { createNewActivity } from '../api';
 
 
@@ -12,7 +12,7 @@ const CreateActivity = ({token, newActivity, setNewActivity}) => {
         <div>
           <article>
               <div>
-              <h3>Create New Routine</h3>
+              <h3>Create New Activity</h3>
               <form onSubmit={async (event) => {
                   event.preventDefault();
                   try {
@@ -57,6 +57,12 @@ const CreateActivity = ({token, newActivity, setNewActivity}) => {
                     </button>
                 </Link>
             </div>
+
+
+            {/* <form onSubmit={async (event) => {
+                event.preventDefault();
+                await
+            }} */}
 
 </div>
     )

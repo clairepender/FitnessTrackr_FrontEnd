@@ -24,7 +24,6 @@ const NavBar = ({token, setToken}) => {
                     <Link to="/myroutines">My Routines | </Link>
                     <Link to="/createnewroutine">Create New Routine | </Link>
                     <Link to="/activities">Public Activities | </Link>
-                    <Link to="/myactivities">My Activities | </Link>
                     <Link to="/createactivity">Create New Activity | </Link>
                     <Link className="nav-link active" to="#" onClick={(event) => {
                                 localStorage.removeItem("token");

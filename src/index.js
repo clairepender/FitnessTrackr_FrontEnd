@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import { getUser } from './api';
 
-import { Login, NavBar, MyRoutines, Routines, CreateNewRoutine, CreateActivity, Activities } from './components';
+import { Login, NavBar, MyRoutines, Routines, CreateNewRoutine, CreateActivity, Activities, AddActivityToRoutine } from './components';
 
 
 
@@ -16,6 +16,7 @@ const App = () => {
     const [display, setDisplay] = useState([]);
     const [myRoutines, setMyRoutines] = useState([]);
     const [newActivity, setNewActivity] = useState([]);
+    const [displayActivities, setDisplayActivities] = useState([]);
 
 
     // useEffect(() => {
@@ -53,8 +54,8 @@ const App = () => {
                 <Route exact path="/myroutines" render={(routeProps) => <MyRoutines {...routeProps} token={token} setToken={setToken} setUser={setUser} user={user} setMyRoutines={setMyRoutines} myRoutines={myRoutines} />}/>
                 <Route exact path="/createnewroutine" render={(routeProps) => <CreateNewRoutine {...routeProps} token={token} setToken={setToken} setDisplay={setDisplay} display={display} />}/>
                 <Route exact path="/createactivity" render={(routeProps) => <CreateActivity {...routeProps} token={token} newActivity={newActivity} setNewActivity={setNewActivity} />}/>
-                <Route exact path="/activities" render={(routeProps) => <Activities {...routeProps} token={token} />}/>
-  
+                <Route exact path="/activities" render={(routeProps) => <Activities {...routeProps} token={token} displayActivities={displayActivities} setDisplayActivities={setDisplayActivities} />}/>
+                <Route exact path="/addactivitytoroutine" render={(routeProps) => <AddActivityToRoutine {...routeProps} token={token} displayActivities={displayActivities} setDisplayActivities={setDisplayActivities} />} />
             </div>
         </BrowserRouter>
     )

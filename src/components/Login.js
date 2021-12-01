@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { BASE_URL } from '../constants';
-import { } from '../api';
 
-async function register(userName, passWord, setToken, confirmPassword) {
+
+async function register(userName, passWord, setToken) {
     // if (passWord !== confirmPassword) {
     //     alert("Passwords don't match!");
     //     return;

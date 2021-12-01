@@ -5,6 +5,8 @@ import Routines from './Routines';
 import CreateNewRoutine from './CreateNewRoutine';
 import CreateActivity from './CreateActivity';
 import Activities from './Activities';
+import AddActivityToRoutine from './AddActivityToRoutine';
+
 
 export { Login };
 export { NavBar };
@@ -13,3 +15,4 @@ export { Routines };
 export { CreateNewRoutine };
 export { CreateActivity };
 export { Activities };
+export { AddActivityToRoutine };
