@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import { getUser } from './api';
 
-import { Login, NavBar, MyRoutines, Routines, CreateNewRoutine } from './components';
+import { Login, NavBar, MyRoutines, Routines, CreateNewRoutine, MyActivities, Activities } from './components';
 
 
 
@@ -51,8 +51,8 @@ const App = () => {
                 <Route exact path="/routines" render={(routeProps) => <Routines token={token} />}/>
                 <Route exact path="/myroutines" render={(routeProps) => <MyRoutines {...routeProps} token={token} setToken={setToken} setUser={setUser} user={user} setMyRoutines={setMyRoutines} myRoutines={myRoutines} />}/>
                 <Route exact path="/createnewroutine" render={(routeProps) => <CreateNewRoutine {...routeProps} token={token} setToken={setToken} setDisplay={setDisplay} display={display} />}/>
-        
-
+                <Route exact path="/myactivities" render={(routeProps) => <MyActivities {...routeProps} token={token} />}/>
+                <Route exact path="/activities" render={(routeProps) => <Activities {...routeProps} token={token} />}/>
   
             </div>
         </BrowserRouter>

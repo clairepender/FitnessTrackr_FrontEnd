@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { getUser, getUserRoutines } from '../api';
+import { getUserRoutines } from '../api';
 
 
 
@@ -17,9 +17,9 @@ be able to remove any activity from the routine */
 
 
 
-async function getMyRoutines(username) {
+async function getMyRoutines(username, token) {
     console.log(username)
-    const routines = await getUserRoutines(username)
+    const routines = await getUserRoutines(username, token)
     // console.log('these are my routines', routines)
     return routines;
 }

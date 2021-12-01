@@ -121,13 +121,14 @@ export async function createRoutine(token, newName, newGoal, newPublic) {
 
 const USER_BASE_URL = "https://fitnesstrackr-rafa.herokuapp.com/api/users";
 
-export async function getUserRoutines(username) {
+export async function getUserRoutines(username, token) {
     if(!username) return [];
     try {
         const response = await fetch(`${USER_BASE_URL}/${username}/routines`, {
             method: "GET",
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
         })
         const data = await response.json();
@@ -138,20 +139,6 @@ export async function getUserRoutines(username) {
         console.log(error);
     }
 } 
-
-// export async function getUserRoutines(username) {
-//     try {
-//         const response = await fetch(`${BASE_URL}/users/${username}/routines`)
-//         console.log('this is the response', response)
-//         const result = await response.json();
-//         const theResult = result;
-//         console.log('this is the API result', theResult)
-//         return theResult;
-
-//     } catch(error) {
-//         console.error("ERROR GETTING USER ROUTINE DATA")
-//     }
-// }
 
 
 // PATCH /api/routines/:routineId//
@@ -203,7 +190,7 @@ export async function deleteRoutine() {
 
 export async function getAllActivities() {
     try {
-        const response = await fetch(`${BASE_URL}/routines`, {
+        const response = await fetch(`${BASE_URL}/activities`, {
             headers: {
               'Content-Type': 'application/json',
             },
@@ -211,8 +198,6 @@ export async function getAllActivities() {
           const result = await response.json();
           console.log(result);
           return result;
-        //   setUser[result.data.username];
-        //   return data;
     } catch(error) {
         console.error(error);
     }
