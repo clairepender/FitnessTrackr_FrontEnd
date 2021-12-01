@@ -17,10 +17,11 @@ be able to remove any activity from the routine */
 
 
 
-async function getMyRoutines(username, token) {
+async function getMyRoutines(username, token, setMyRoutines) {
     console.log(username)
     const routines = await getUserRoutines(username, token)
     // console.log('these are my routines', routines)
+    setMyRoutines(routines)
     return routines;
 }
 
@@ -29,14 +30,9 @@ const MyRoutines = ({token, user}) => {
     const [myRoutines, setMyRoutines] = useState([]);
 
 
-
-
-    useEffect(async () => {
+    useEffect(() => {
         if(user) {
-           const userData = await getMyRoutines(user, token, setMyRoutines)
-            console.log(user)
-            setMyRoutines(userData)
-            
+            getMyRoutines(user, token, setMyRoutines)
         }
     }, [user])
 
@@ -46,12 +42,12 @@ const MyRoutines = ({token, user}) => {
         return (
             <div>
 
-            {/* <h3> {user}: </h3> */}
+            <h2> Routines for {user} </h2>
 
             {myRoutines.map((routine, index) => {
                 return (
                     <div key={index}>
-                        <h4>Routine Name: {routine.name}</h4>
+                        <h4>Name: {routine.name}</h4>
                         <ul>
                             <li>Goal: {routine.goal}</li>
                             <li>Activities: {routine.activities}</li>

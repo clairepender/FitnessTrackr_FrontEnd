@@ -16,18 +16,18 @@ A list of activities for the routine, including their name, description, and dur
 
 const Routines = ({token}) => {
     const [display, setDisplay] = useState([]);
-
  
 
     useEffect(async () => {
         const getRoutines = await getAllRoutines(token);
+        console.log(getRoutines)
         setDisplay(getRoutines)
     }, [token])
 
     return (
         <div>
                 <h2>
-               All Public Routines:
+               All Public Routines
                </h2>
             
 
@@ -38,6 +38,19 @@ const Routines = ({token}) => {
                         <ul>
                             <li>Goal: {routine.goal} </li>
                             <li>Creator: {routine.creatorName} </li>
+                            <li>Activities: </li>
+                                {routine.activities ? (routine.activities.map((activity, actindex) => (
+                                    <ul key={actindex}>
+                                        <li>Activity Name: {activity.name}</li>
+                                        <ul>
+                                            <li>Description: {activity.description}</li>
+                                            <li>Count: {activity.count}</li>
+                                            <li>Duration: {activity.duration}</li>
+                                        </ul> 
+                                    </ul>
+                                ))) : 
+                                (<p>none</p>)}
+                        
                         </ul>
                     </div>
                 )

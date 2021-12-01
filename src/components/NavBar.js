@@ -19,7 +19,7 @@ const NavBar = ({token, setToken}) => {
                     : 
                     
                     <div id="nav-bar-with-token">
-                    <Link to="/">Home </Link>
+                    <Link to="/">Home | </Link>
                     <Link to="/routines">Public Routines | </Link>
                     <Link to="/myroutines">My Routines | </Link>
                     <Link to="/createnewroutine">Create New Routine | </Link>
