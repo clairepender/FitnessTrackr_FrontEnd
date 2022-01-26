@@ -16,7 +16,7 @@ const NavBar = ({token, setToken}) => {
                     <Link to="/myroutines">My Routines | </Link>
                     <Link to="/activities">Public Activities | </Link>
                     <Link to="/register">Sign Up | </Link>
-                    <Link className="nav-link active" to="/login">Login </Link> 
+                    <Link className="nav-link active" to="/login">LOGIN </Link> 
                     </div>
                     : 
                     
