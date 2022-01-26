@@ -65,6 +65,7 @@ const Login = ({setToken, match}) => {
 
     return (
         <form
+        className="m-3 w-50 position-absolute top-50 start-50 translate-middle"
         onSubmit={(event) => {
             event.preventDefault();
             if (match.url === "/login") login(userName, passWord, setToken) 
@@ -73,29 +74,29 @@ const Login = ({setToken, match}) => {
         }}
         >
             {/*USERNAME*/}
-        <div className="container">
-            <label className="form-label">
+        <div className="form-group centered">
+            <label className="row mb-2">
                 Username
             </label>
             <input
                 type="text"
                 value={userName}
                 onChange={({target: {value}}) => setUsername(value)}
-                className="form-control"
+                className="row mb-3"
                 id="usernameInput"
                 placeholder="your username here"
                 />
         </div>
             {/*PASSWORD*/}
-        <div className="container">
-            <label className="form-label">
+        <div className="form-group centered">
+            <label className="row mb-2">
                 Password
             </label>
             <input
                 type="password"
                 value={passWord}
                 onChange={({target: {value}}) => setPassword(value)}
-                className="form-control"
+                className="row mb-3"
                 id="passwordInput"
                 placeholder="your password here"
             />
@@ -103,7 +104,7 @@ const Login = ({setToken, match}) => {
             {/*CONFIRM PASSWORD*/}
             {/* To Do: ONLY RENDER IF /register */}
         {match.url === "/register" ?    
-        (<div className="container">
+        (<div className="form-group centered">
             <label className="form-label">
                 Confirm Password
             </label>
@@ -118,17 +119,19 @@ const Login = ({setToken, match}) => {
         </div>) : null}
 
             {/*SUBMIT BUTTON*/}
-        <div className="submit">
-            <button type="submit" className="submit-button">
+            <div className="form-group centered">
+            <button type="submit" className="btn mb-2 btn-info btn-sm btn-block">
                 Submit
             </button>
             {/* Link to login and register*/}
+            <div className="form-group centered">
             {
                 match.url === "/register" ?
                 <Link to="/login"> Already have an account? </Link>
-                : <Link to="/register"> Don't have an account?</Link>
+                : <Link to="/register" className="link-dark">Don't have an account?</Link>
 
             }
+            </div>
         </div>
 
         </form>
