@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { getUser } from './api';
 
-import { Login, NavBar, MyRoutines, Routines, CreateNewRoutine, CreateActivity, Activities, AddActivityToRoutine } from './components';
+import { Home, Login, NavBar, MyRoutines, Routines, CreateNewRoutine, CreateActivity, Activities, AddActivityToRoutine } from './components';
 
 
 
@@ -43,19 +43,24 @@ const App = () => {
     return (
         <BrowserRouter>
             <div>
-                <div id="title">
-                    <h3>Fitness Trackr</h3>
-                </div>
-                <NavBar token={token} setToken={setToken} />
-                {/* ROUTE PATHS BELOW*/}
-                <Route path="/login" render={(routeProps) => <Login {...routeProps} setToken={setToken} />}/> 
-                <Route path="/register" render={(routeProps) => <Login {...routeProps} setToken={setToken} />}/>
-                <Route exact path="/routines" render={(routeProps) => <Routines token={token} />}/>
-                <Route exact path="/myroutines" render={(routeProps) => <MyRoutines {...routeProps} token={token} setToken={setToken} setUser={setUser} user={user} setMyRoutines={setMyRoutines} myRoutines={myRoutines} />}/>
-                <Route exact path="/createnewroutine" render={(routeProps) => <CreateNewRoutine {...routeProps} token={token} setToken={setToken} setDisplay={setDisplay} display={display} />}/>
-                <Route exact path="/createactivity" render={(routeProps) => <CreateActivity {...routeProps} token={token} newActivity={newActivity} setNewActivity={setNewActivity} />}/>
-                <Route exact path="/activities" render={(routeProps) => <Activities {...routeProps} token={token} displayActivities={displayActivities} setDisplayActivities={setDisplayActivities} />}/>
-                <Route exact path="/addactivitytoroutine" render={(routeProps) => <AddActivityToRoutine {...routeProps} token={token} displayActivities={displayActivities} setDisplayActivities={setDisplayActivities} />} />
+                    <div className="card text-center">
+                        <div id="title-card" className="card-header">
+                            <h1 className="text-dark font-spartan"><b>Fitness Tracker</b></h1>
+                        </div>
+                    </div>
+                
+                    <NavBar token={token} setToken={setToken} />
+                    
+                    {/* ROUTE PATHS BELOW*/}
+                    <Route path="/" render={(routeProps) => <Home {...routeProps} />}/> 
+                    <Route path="/login" render={(routeProps) => <Login {...routeProps} setToken={setToken} />}/> 
+                    <Route path="/register" render={(routeProps) => <Login {...routeProps} setToken={setToken} />}/>
+                    <Route exact path="/routines" render={(routeProps) => <Routines token={token} />}/>
+                    <Route exact path="/myroutines" render={(routeProps) => <MyRoutines {...routeProps} token={token} setToken={setToken} setUser={setUser} user={user} setMyRoutines={setMyRoutines} myRoutines={myRoutines} />}/>
+                    <Route exact path="/createnewroutine" render={(routeProps) => <CreateNewRoutine {...routeProps} token={token} setToken={setToken} setDisplay={setDisplay} display={display} />}/>
+                    <Route exact path="/createactivity" render={(routeProps) => <CreateActivity {...routeProps} token={token} newActivity={newActivity} setNewActivity={setNewActivity} />}/>
+                    <Route exact path="/activities" render={(routeProps) => <Activities {...routeProps} token={token} displayActivities={displayActivities} setDisplayActivities={setDisplayActivities} />}/>
+                    <Route exact path="/addactivitytoroutine" render={(routeProps) => <AddActivityToRoutine {...routeProps} token={token} displayActivities={displayActivities} setDisplayActivities={setDisplayActivities} />} />
             </div>
         </BrowserRouter>
     )

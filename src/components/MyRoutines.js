@@ -70,6 +70,7 @@ const MyRoutines = ({token, user}) => {
                                 (<p>none</p>)}
                                 <ul>
                                         <button
+                                        className="btn mb-2 btn-info btn-sm btn-block"
                                             onClick={async () => {
                                             const routineId = routine.id
                                             const result = await deleteRoutine(token, routineId);

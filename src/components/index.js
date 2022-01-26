@@ -6,6 +6,7 @@ import CreateNewRoutine from './CreateNewRoutine';
 import CreateActivity from './CreateActivity';
 import Activities from './Activities';
 import AddActivityToRoutine from './AddActivityToRoutine';
+import Home from './Home';
 
 
 export { Login };
@@ -16,3 +17,4 @@ export { CreateNewRoutine };
 export { CreateActivity };
 export { Activities };
 export { AddActivityToRoutine };
+export { Home };

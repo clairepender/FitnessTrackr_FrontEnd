@@ -14,7 +14,7 @@ const Activities = ({token}) => {
     }, [token])
 
     return (
-        <div>
+        <div className="container">
                 <h2>
                All Public Activities
                </h2>
@@ -31,9 +31,10 @@ const Activities = ({token}) => {
                 )
             })}
 
-            <div>
+            <div className="form-group centered">
                 <Link to="/createactivity">
-                    <button type="button" id="createnewactivity">
+                    <button type="button" id="createnewactivity"
+                    className="btn mb-2 btn-info btn-sm btn-block">
                         Create a New Activity
                     </button>
                 </Link>
