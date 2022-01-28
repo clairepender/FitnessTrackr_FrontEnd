@@ -47,47 +47,54 @@ const MyRoutines = ({token, user}) => {
     return  (
             <div>
 
-            <h2> Routines for {user} </h2>
-
-            {myRoutines.map((routine, index) => {
-                return (
-                    <div key={index}>
-                        <h4>Name: {routine.name}</h4>
-                        <ul>
-                            <li>Goal: {routine.goal}</li>
-                            <li>Activities: {routine.activities}</li>
-                            <li>Activities: </li>
-                                {myRoutines.activities ? (myRoutines.activities.map((activity, actindex) => (
-                                    <ul key={actindex}>
-                                        <li>Activity Name: {activity.name}</li>
-                                        <ul>
-                                            <li>Description: {activity.description}</li>
-                                            <li>Count: {activity.count}</li>
-                                            <li>Duration: {activity.duration}</li>
-                                        </ul> 
+                <h2> Routines for {user} </h2>
+                
+                {myRoutines.map((routine, index) => {
+                    
+                    return (
+                    <> 
+                    
+                        <div className="card w-75 p-1 m-2 ms-5" key={index}>
+                            <div className="card-header"> <h4>{routine.name}</h4></div>
+                            
+                            <ul>
+                                <li>Goal: {routine.goal}</li>
+                                <li>Activities: {routine.activities}</li>
+                                <li>Activities: </li>
+                                    {myRoutines.activities ? (myRoutines.activities.map((activity, actindex) => (
+                                        <ul key={actindex}>
+                                            <li>Activity Name: {activity.name}</li>
+                                            <ul>
+                                                <li>Description: {activity.description}</li>
+                                                <li>Count: {activity.count}</li>
+                                                <li>Duration: {activity.duration}</li>
+                                            </ul> 
+                                        </ul>
+                                    ))) : 
+                                    (<p>none</p>)}
+                                    <ul>
+                                            <button
+                                            className="btn mb-2 btn-info btn-sm btn-block"
+                                                onClick={async () => {
+                                                const routineId = routine.id
+                                                const result = await deleteRoutine(token, routineId);
+                                                alert('Routine deleted!');
+                                                backToAllRoutines();
+                                                }}
+                                                className="deleteButton">
+                                                Delete Routine
+                                            </button>
                                     </ul>
-                                ))) : 
-                                (<p>none</p>)}
-                                <ul>
-                                        <button
-                                        className="btn mb-2 btn-info btn-sm btn-block"
-                                            onClick={async () => {
-                                            const routineId = routine.id
-                                            const result = await deleteRoutine(token, routineId);
-                                            alert('Routine deleted!');
-                                            backToAllRoutines();
-                                            }}
-                                            className="deleteButton">
-                                            Delete Routine
-                                        </button>
-                                </ul>
-                        </ul>
-                    </div>
-                )
-            })}
+                            </ul>
+                        </div>
+                        </>
+                    )
+                })}
 
             </div>
+
             )
+        
         
 }
 

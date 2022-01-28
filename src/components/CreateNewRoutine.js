@@ -20,8 +20,10 @@ const CreateNewRoutine = ({token, display, setDisplay}) => {
           <div>
             <article>
                 <div>
-                <h3>Create New Routine</h3>
-                <form onSubmit={async (event) => {
+                <div className="text-center font-spartan">Create New Routine</div>
+                <form 
+               className="m-3 w-50 position-absolute top-50 start-50 translate-middle"
+                onSubmit={async (event) => {
                     event.preventDefault();
                     try {
                         const result = await createRoutine(token, newName, newGoal, newPublic)
