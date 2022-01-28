@@ -52,7 +52,7 @@ const App = () => {
                     <NavBar token={token} setToken={setToken} />
                     
                     {/* ROUTE PATHS BELOW*/}
-                    <Route path="/" render={(routeProps) => <Home {...routeProps} />}/> 
+                    <Route exact path="/" render={(routeProps) => <Home {...routeProps} />}/> 
                     <Route path="/login" render={(routeProps) => <Login {...routeProps} setToken={setToken} />}/> 
                     <Route path="/register" render={(routeProps) => <Login {...routeProps} setToken={setToken} />}/>
                     <Route exact path="/routines" render={(routeProps) => <Routines token={token} />}/>

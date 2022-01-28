@@ -29,36 +29,41 @@ const Routines = ({token}) => {
 
    
     return (
-        <div>
+        <div className="container-fluid">
+            <div className="centered">
+                <div className="text-center font-spartan">
                 <h2>
-               All Public Routines
+               Public Routines
                </h2>
-            
+               </div>
 
             {display.map((routine, index) => {
                 return (
-                    <div key={index}>
-                        <h4>{routine.name}</h4>
-                        <ul>
-                            <li>Goal: {routine.goal} </li>
-                            <li>Creator: {routine.creatorName} </li>
-                            <li>Activities: </li>
-                                {routine.activities ? (routine.activities.map((activity, actindex) => (
-                                    <ul key={actindex}>
-                                        <li>Activity Name: {activity.name}</li>
-                                        <ul>
-                                            <li>Description: {activity.description}</li>
-                                            <li>Count: {activity.count}</li>
-                                            <li>Duration: {activity.duration}</li>
-                                        </ul> 
-                                    </ul>
-                                ))) : 
-                                (<p>none</p>)}
-                        
-                        </ul>
-                    </div>
-                )
+                    <div className="card w-75 p-1 m-2 ms-5" key={index}>
+                        <div className="card-header"> <h4>{routine.name}</h4></div>
+                            <ul>
+                               <div className="card-body p-2"> 
+                                <h5>Goal: {routine.goal} </h5>
+                                <h6>Creator: {routine.creatorName} </h6>
+                                <h6>Activities: </h6>
+                                    {routine.activities ? (routine.activities.map((activity, actindex) => (
+                                        <div key={actindex}>
+                                            <h6>Activity Name: {activity.name}</h6>
+                                            <ul>
+                                                <li>Description: {activity.description}</li>
+                                                <li>Count: {activity.count}</li>
+                                                <li>Duration: {activity.duration}</li>
+                                            </ul> 
+                                        </div> 
+                                    ))) : 
+                                    (<p>none</p>)}
+                                </div>
+                            </ul>
+                    </div> 
+                    
+                ) 
             })}
+            </div>
         </div>
     )
     

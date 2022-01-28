@@ -22,11 +22,13 @@ const Activities = ({token}) => {
 
             {displayActivities.map((activity, index) => {
                 return (
-                    <div key={index}>
-                        <h4>Name: {activity.name}</h4>
-                        <ul>
-                            <li>Description: {activity.description}</li>
-                        </ul>
+                    <div className="card w-75 p-1 m-2 ms-1" key={index}>
+                        <div className="card-header"> <h4>{activity.name}</h4></div>
+                            <div className="card-body">
+                        
+                            <h6>Description: {activity.description}</h6>
+                        
+                            </div>
                     </div>
                 )
             })}
