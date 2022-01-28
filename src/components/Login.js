@@ -70,7 +70,7 @@ const Login = ({setToken, match}) => {
             event.preventDefault();
             if (match.url === "/login") login(userName, passWord, setToken) 
             if (match.url === "/register") register(userName, passWord, confirmPassword, setToken)
-            history.push('/routines')
+            history.push('/login')
         }}
         >
             {/*USERNAME*/}
