@@ -6,7 +6,7 @@ const NavBar = ({token, setToken}) => {
         console.log(token)
     return (
         <nav>
-            <div className="navbar navbar-expand-lg navbar-light bg-light text-dark font-spartan">
+            <div id="links" className="navbar navbar-expand-lg navbar-light bg-light text-dark font-spartan">
             <div className="container-fluid">
                 {(!token ? 
                 
@@ -16,7 +16,7 @@ const NavBar = ({token, setToken}) => {
                     <Link to="/myroutines">My Routines | </Link>
                     <Link to="/activities">Public Activities | </Link>
                     <Link to="/register">Sign Up | </Link>
-                    <Link className="nav-link active" to="/login">LOGIN </Link> 
+                    <Link to="/login">Login </Link> 
                     </div>
                     : 
                     
@@ -26,8 +26,8 @@ const NavBar = ({token, setToken}) => {
                     <Link to="/myroutines">My Routines | </Link>
                     <Link to="/createnewroutine">Create New Routine | </Link>
                     <Link to="/activities">Public Activities | </Link>
-                    <Link to="/createactivity">Create New Activity  </Link>
-                    <Link className="nav-link active" to="#" onClick={(event) => {
+                    <Link to="/createactivity">Create New Activity | </Link>
+                    <Link to="#" onClick={(event) => {
                                 localStorage.removeItem("token");
                                 setToken("");
                         }}>Log Out</Link>

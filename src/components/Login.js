@@ -112,7 +112,7 @@ const Login = ({setToken, match}) => {
                 type="password" 
                 onChange={({target: {value}}) => setConfirmPassword(value)}
                 value={confirmPassword}
-                className="form-control"
+                className="row mb-3"
                 id="setConfirmPasswordInput"
                 placeholder=""
             />

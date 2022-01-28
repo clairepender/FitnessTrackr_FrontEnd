@@ -31,7 +31,7 @@ const Routines = ({token}) => {
     return (
         <div className="container-fluid">
             <div className="centered">
-                <div className="text-center font-spartan">
+                <div className="text-center font-spartan p-2">
                 <h2>
                Public Routines
                </h2>

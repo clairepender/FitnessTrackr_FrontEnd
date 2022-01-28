@@ -12,8 +12,10 @@ const CreateActivity = ({token, newActivity, setNewActivity}) => {
         <div>
           <article>
               <div>
-              <h3>Create New Activity</h3>
-              <form onSubmit={async (event) => {
+              <div className="text-center font-spartan p-2"><h2>Create New Activity</h2></div>
+              
+              <form className="m-3 w-50 position-absolute top-50 start-50 translate-middle"
+              onSubmit={async (event) => {
                   event.preventDefault();
                   try {
                       const result = await createNewActivity(token, newActName, newActDesc)
@@ -23,8 +25,9 @@ const CreateActivity = ({token, newActivity, setNewActivity}) => {
                       console.error(error)
                   };
               }}>
-                  <div>
-                  <label htmlFor="activityName">Activity Name:</label>
+                  <div className="form-group centered">
+                  <label className="row m-2"
+                  htmlFor="activityName">Activity Name:</label>
                   <input 
                       type='text'
                       value={newActName}
@@ -33,8 +36,9 @@ const CreateActivity = ({token, newActivity, setNewActivity}) => {
                       id='activityName'
                       placeholder='name'
                   /></div>
-                  <div>
-                      <label htmlFor="activityDescription">Description:</label>
+                  <div className="form-group centered">
+                      <label className="row m-2"
+                      htmlFor="activityDescription">Description:</label>
                       <input 
                           type='text'
                           value={newActDesc}
@@ -44,19 +48,18 @@ const CreateActivity = ({token, newActivity, setNewActivity}) => {
                           placeholder='description'
                       /></div>
                         <div>
-                        <button className="submitNewActivity">Submit!</button>
+                        <button className="btn m-3 btn-info btn-sm btn-block">Submit!</button>
                         </div>
+
+                        <div id="links" className="text-spartan">
+                        <Link to="/activities">
+                        <h6>Back to Public Activities</h6>
+                        </Link></div>
               </form>
               </div>
         </article>
               
-            <div>
-                <Link to="/activities">
-                    <button type="button" id="activities">
-                        Back to All Public Activities
-                    </button>
-                </Link>
-            </div>
+           
 
 
             {/* <form onSubmit={async (event) => {

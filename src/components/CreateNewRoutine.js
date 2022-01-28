@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { createRoutine } from '../api'
 
 /* As a registered user on the My Routines tab, I want to:
@@ -13,6 +13,12 @@ const CreateNewRoutine = ({token, display, setDisplay}) => {
     const [newGoal, setNewGoal] = useState('');
     const [newPublic, setNewPublic] = useState(false)
 
+    const history = useHistory();
+
+    function backToAllRoutines() {
+        history.push('/routines')
+    };
+
 
 
     if(token) {
@@ -20,7 +26,7 @@ const CreateNewRoutine = ({token, display, setDisplay}) => {
           <div>
             <article>
                 <div>
-                <div className="text-center font-spartan">Create New Routine</div>
+                <div className="text-center font-spartan p-2"><h2>Create New Routine</h2></div>
                 <form 
                className="m-3 w-50 position-absolute top-50 start-50 translate-middle"
                 onSubmit={async (event) => {
@@ -32,9 +38,11 @@ const CreateNewRoutine = ({token, display, setDisplay}) => {
                     } catch (error) {
                         console.error(error)
                     };
+                    backToAllRoutines();
                 }}>
-                    <div>
-                    <label htmlFor="routineName">Routine Name:</label>
+                    <div className="form-group centered">
+                    <label className="row m-2"
+                    htmlFor="routineName">Routine Name:</label>
                     <input 
                         type='text'
                         value={newName}
@@ -43,8 +51,9 @@ const CreateNewRoutine = ({token, display, setDisplay}) => {
                         id='routineName'
                         placeholder='name'
                     /></div>
-                    <div>
-                        <label htmlFor="routineGoal">Routine Goal:</label>
+                    <div className="form-group centered">
+                        <label className="row m-2"
+                        htmlFor="routineGoal">Routine Goal:</label>
                         <input 
                             type='text'
                             value={newGoal}
@@ -53,25 +62,30 @@ const CreateNewRoutine = ({token, display, setDisplay}) => {
                             id='routineGoal'
                             placeholder='goal'
                         /></div>
-                        <div>
-                        <label htmlFor="routinePublic">Make Routine Public?</label>
-                        <input 
+                        <div className="form-group centered">
+                        <label className="column m-2"
+                        htmlFor="routinePublic">Make Routine Public?</label>
+                        <input className="column mb-2"
                         type='checkbox'
                         value={newPublic}
                         onChange={({target: {value}}) => setNewPublic(!newPublic)}
                         id='routinePublic'
                         /></div>
-                        <div>
-                        <button className="submitNewRoutine">Submit!</button></div>
+                            <div>
+                                <button className="btn m-2 btn-info btn-sm btn-block">Submit!</button>
+                            </div>
+
+                        <div id="links" className="text-spartan">
+                        <Link to="/myroutines">
+                        <h6>Back to My Routines</h6>
+                        </Link></div>
                 </form>
+                
+                
                 </div>
           </article>
-                <div>
-            <Link to="/myroutines">
-                <button type="button" id="newRoutine">
-                Back to My Routines
-                </button>
-            </Link></div>
+
+                
 
 </div>
       )

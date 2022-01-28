@@ -15,9 +15,11 @@ const Activities = ({token}) => {
 
     return (
         <div className="container">
+            <div id="title" className="font-spartan text-center p-2">
                 <h2>
-               All Public Activities
+               Public Activities
                </h2>
+               </div>
             
 
             {displayActivities.map((activity, index) => {

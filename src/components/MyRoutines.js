@@ -46,8 +46,7 @@ const MyRoutines = ({token, user}) => {
 
     return  (
             <div>
-
-                <h2> Routines for {user} </h2>
+                <div className="font-spartan text-center p-2"><h2> Routines for {user} </h2></div>
                 
                 {myRoutines.map((routine, index) => {
                     
@@ -58,9 +57,8 @@ const MyRoutines = ({token, user}) => {
                             <div className="card-header"> <h4>{routine.name}</h4></div>
                             
                             <ul>
-                                <li>Goal: {routine.goal}</li>
-                                <li>Activities: {routine.activities}</li>
-                                <li>Activities: </li>
+                                <h5>Goal: {routine.goal}</h5>
+                                <h6>Activities: {routine.activities}</h6>
                                     {myRoutines.activities ? (myRoutines.activities.map((activity, actindex) => (
                                         <ul key={actindex}>
                                             <li>Activity Name: {activity.name}</li>
