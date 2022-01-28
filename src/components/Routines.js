@@ -12,9 +12,9 @@ A list of activities for the routine, including their name, description, and dur
 
 async function getRoutines(setDisplay) {
     const theRoutines = await getAllRoutines(setDisplay)
-    console.log(theRoutines)
-    // setDisplay(theRoutines)
-    // console.log(theRoutines)
+   
+    setDisplay(theRoutines)
+    
 }
 
 const Routines = ({token}) => {

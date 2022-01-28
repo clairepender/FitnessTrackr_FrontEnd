@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const NavBar = ({token, setToken}) => {
     
-        console.log(token)
+       
     return (
         <nav>
             <div id="links" className="navbar navbar-expand-lg navbar-light bg-light text-dark font-spartan">

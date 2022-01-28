@@ -17,13 +17,11 @@ be able to remove any activity from the routine */
 
 
 
-async function getMyRoutines(username, token, setMyRoutines) {
-    console.log(username)
-    const routines = await getUserRoutines(username, token)
-    // console.log('these are my routines', routines)
-    setMyRoutines(routines)
-    return routines;
-}
+// async function getMyRoutines(username, token, setMyRoutines) {
+//     const routines = await getUserRoutines(username, token)
+//     setMyRoutines(routines)
+//     return routines;
+// }
 
 
 const MyRoutines = ({token, user}) => {
@@ -37,7 +35,12 @@ const MyRoutines = ({token, user}) => {
 
     useEffect(() => {
         if(user) {
-            getMyRoutines(user, token, setMyRoutines)
+            async function getMyRoutines(username, token) {
+                const routines = await getUserRoutines(username, token)
+                return routines;
+            }
+        getMyRoutines();
+        setMyRoutines(myRoutines)
         }
     }, [user])
 

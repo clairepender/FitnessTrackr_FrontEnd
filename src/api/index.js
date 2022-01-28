@@ -54,7 +54,6 @@ export async function getUser(token, setUser){
         const username = data.username;
         setUser(username)
         localStorage.setItem("user", username);
-        console.log("this is the getUser result", username);
         return username
     } catch(err) {
       console.error(err);
@@ -78,10 +77,8 @@ export async function getAllRoutines(setDisplay) {
           })
           const result = await response.json();
           setDisplay(result)
-        //   console.log(result);
           return result;
-        //   setUser[result.data.username];
-        //   return data;
+       
     } catch(error) {
         console.error(error);
     }
@@ -108,7 +105,6 @@ export async function createRoutine(token, newName, newGoal, newPublic) {
               })
           })
           const result = await response.json();
-          console.log('create routine result', result);
           return result;
         
     } catch(error) {
@@ -133,7 +129,6 @@ export async function getUserRoutines(username, token) {
             },
         })
         const data = await response.json();
-        console.log('myRoutineData from API Index', data)
         return data;
       
     } catch(error) {
@@ -175,7 +170,6 @@ export async function deleteRoutine(token, routineId) {
             },
           })
           const result = await response.json();
-          console.log(result);
           return result;
       
     } catch(error) {
@@ -197,7 +191,6 @@ export async function getAllActivities() {
             },
           })
           const result = await response.json();
-          console.log(result);
           return result;
     } catch(error) {
         console.error(error);
@@ -223,7 +216,6 @@ export async function createNewActivity(token, newActName, newActDesc){
         })
     })
     const data = await response.json();
-    console.log(data)
     return data;
   }
 
@@ -252,7 +244,6 @@ export async function addActivityToRoutine(routineId, activityId, newCount, newD
             })
         })
         const data = await response.json();
-        console.log(data)
     } catch(error) {
         console.error(error)
     }
@@ -278,7 +269,6 @@ export async function removeActivityFromRoutine() {
             },
           })
           const result = await response.json();
-        //   console.log(result);
           return result;
       
     } catch(error) {

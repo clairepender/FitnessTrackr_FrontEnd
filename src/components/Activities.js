@@ -9,7 +9,7 @@ const Activities = ({token}) => {
 
     useEffect(async () => {
         const getActivities = await getAllActivities(token)
-        console.log(getActivities)
+        
         setDisplayActivities(getActivities)
     }, [token])
 
