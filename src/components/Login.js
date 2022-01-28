@@ -68,9 +68,14 @@ const Login = ({setToken, match}) => {
         className="m-3 w-50 position-absolute top-50 start-50 translate-middle"
         onSubmit={(event) => {
             event.preventDefault();
-            if (match.url === "/login") login(userName, passWord, setToken) 
-            if (match.url === "/register") register(userName, passWord, confirmPassword, setToken)
+            if (match.url === "/login") {
+                login(userName, passWord, setToken) 
+                history.push("/routines")
+            }
+            if (match.url === "/register") {
+                register(userName, passWord, confirmPassword, setToken)
             history.push('/login')
+            }
         }}
         >
             {/*USERNAME*/}
