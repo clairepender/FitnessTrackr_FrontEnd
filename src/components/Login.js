@@ -64,6 +64,13 @@ const Login = ({setToken, match}) => {
     const [confirmPassword, setConfirmPassword] = useState("");
 
     return (
+
+        <>
+
+        <div className="text-center font-spartan p-2">
+            <h3>First thing's first.</h3>
+        </div>
+
         <form
         className="m-3 w-50 position-absolute top-50 start-50 translate-middle"
         onSubmit={(event) => {
@@ -140,6 +147,7 @@ const Login = ({setToken, match}) => {
         </div>
 
         </form>
+        </>
     )
 }
 

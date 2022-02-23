@@ -45,7 +45,7 @@ const App = () => {
             <div>
                     <div className="card text-center">
                         <div id="title-card" className="card-header">
-                            <h1 className="text-dark font-spartan"><b>Fitness Tracker</b></h1>
+                            <h1 className="text-dark"><b>FITNESS TRACKER</b></h1>
                         </div>
                     </div>
                 

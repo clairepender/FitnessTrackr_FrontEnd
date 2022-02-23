@@ -1,6 +1,15 @@
 
-.homeImage{
-    border: 2px solid black;
+.card-header{
+    font-family: 'Exo', sans-serif;
+}
+
+.text-dark{
+    font-size: 60px;
+}
+
+.img-card{
+    border: 5px solid black;
+    box-shadow: 5px 5px 5px black;
 }
 
 .font-spartan{
